@@ -1,0 +1,27 @@
+{
+  "code": 0
+  ,"msg": "",
+  "count": "100",
+  "data": [
+    {
+      "id": 1,
+      "projectCode": " 0568555",
+      "projectName": "项目名称-1",
+      "manage": "经理-1",
+      "manage2": "经理-2",
+      "dep": "所属部门-1",
+      "province": "山西省",
+      "city": "太原市",
+      "createDate": "2017-8-12 13:50:11",
+      "status": "销售助理维护@@@",
+      "price1": "858",
+      "price2": "9858",
+      "prob": "0.5",
+      "predictDate": "2017-8-12 13:50:11",
+      "mode": "实时更新",
+      "duration": "12个月",
+      "content": "实时更新",
+      "progress": "每周更新"
+    }
+  ]
+}

@@ -1,0 +1,86 @@
+.header-title {
+  font-weight: bold;
+}
+textarea.layui-textarea {
+  width: 506px;
+}
+.table-container {
+  margin: 0 12px;
+}
+.table-add-btn {
+  display: inline-flex;
+  align-items: center;
+  color: #1E9FFF;
+  padding: 6px;
+}
+.table-add-btn:hover {
+  cursor: pointer;
+}
+.table-add-btn .layui-icon {
+  padding-right: 2px;
+}
+
+.layui-form-item {
+  min-width: 310px;
+}
+
+.layui-form-label {
+  min-width: 80px;
+  width: auto;
+}
+
+.layuiadmin-radio {
+  width: 140px !important;
+}
+
+
+/* table 表格*/
+.layui-table-cell, .layui-table-box, .layui-table-body {
+  overflow: visible;
+}
+/* 设置下拉框的高度与表格单元格的高度相同 */
+td .layui-form-select {
+  margin-top: -10px;
+  margin-left: -15px;
+  margin-right: -15px;
+}
+
+.cell-text-container {
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.mask {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 999;
+  cursor: not-allowed;
+}
+
+xm-select {
+  width: 100% !important;
+}
+
+
+/*
+  上传按钮
+*/
+
+.update-btn {
+  display: inline-flex;
+  align-items: center;
+  color: #1E9FFF;
+  padding: 6px;
+}
+.update-btn:hover {
+  cursor: pointer;
+}
+.update-btn .layui-icon {
+  padding-right: 2px;
+}

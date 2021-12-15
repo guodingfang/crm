@@ -1,0 +1,23 @@
+{
+  "code": 0
+  ,"msg": ""
+  ,"count": "100",
+  "data": [
+    {
+      "id": 1,
+      "userName": " 山西三建集团有限公司",
+      "status": "报备中",
+      "nature": "国有企业",
+      "type": "终端用户",
+      "active": "是",
+      "province": "山西省",
+      "city": "太原市",
+      "manage": "客户经理@@@",
+      "dep": "客户经理@@@所在部门",
+      "createDate": "2017-8-12 13:50:11",
+      "updateDate": "2017-8-12 13:50:11",
+      "latestDate": "2017-8-12 13:50:11",
+      "contact": "查看"
+    }
+  ]
+}

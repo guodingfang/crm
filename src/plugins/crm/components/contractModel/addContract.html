@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" href="../../../layui/css/layui.css" media="all">
+  <link rel="stylesheet" href="../../assets/style/admin.css" media="all">
+  <link rel="stylesheet" href="../../assets/style/model.css" media="all">
+</head>
+<body>
+<div class="layui-card layuiadmin-card">
+  <div class="layui-form" lay-filter="layuiadmin-app-form" id="layuiadmin-app-form">
+    <div class="layui-card-header header-title">基本信息</div>
+
+    <div class="layui-form-item layui-inline">
+      <label class="layui-form-label layui-form-label-required">项目名称</label>
+      <div class="layui-input-inline layuiadmin-select-input" id="projectName"></div>
+    </div>
+    <div class="layui-form-item layui-inline">
+      <label class="layui-form-label layui-form-label-required">项目编号</label>
+      <div class="layui-input-inline">
+        <input type="text" id="projectId" name="projectId" placeholder="请输入" autocomplete="off" class="layui-input input-show-val" required lay-verify="required" disabled>
+      </div>
+    </div>
+    <div class="layui-form-item layui-block">
+      <label class="layui-form-label layui-form-label-required">归属客户</label>
+      <div class="layui-input-block layuiadmin-select-input" id="customer"></div>
+    </div>
+    <div class="layui-form-item layui-inline">
+      <label class="layui-form-label layui-form-label-required">合同编号</label>
+      <div class="layui-input-inline">
+        <input type="text" name="conNum" placeholder="请输入" autocomplete="off" class="layui-input input-show-val" required lay-verify="required">
+      </div>
+    </div>
+    <div class="layui-form-item layui-inline">
+      <label class="layui-form-label layui-form-label-required">合同名称</label>
+      <div class="layui-input-inline">
+        <input type="text" name="conName" placeholder="请输入" autocomplete="off" class="layui-input input-show-val" required lay-verify="required">
+      </div>
+    </div>
+    <div class="layui-form-item layui-inline">
+      <label class="layui-form-label layui-form-label-required">合同金额</label>
+      <div class="layui-input-inline">
+        <input type="text" name="conMoney" placeholder="请输入" autocomplete="off" class="layui-input input-show-val" required lay-verify="required">
+      </div>
+    </div>
+    <div class="layui-form-item layui-inline">
+      <label class="layui-form-label layui-form-label-required">归属部门</label>
+      <div class="layui-input-inline">
+        <input type="text" name="userDept" id="userDept" placeholder="请输入" autocomplete="off" class="layui-input input-show-val" required lay-verify="required" disabled>
+      </div>
+    </div>
+    <div class="layui-form-item layui-inline">
+      <label class="layui-form-label layui-form-label-required">签单日期</label>
+      <div class="layui-input-inline">
+        <input type="text" name="conDate" id="conDate" placeholder="请输入" autocomplete="off" class="layui-input input-show-val" required lay-verify="required">
+      </div>
+    </div>
+    <div class="layui-form-item layui-inline">
+      <label class="layui-form-label layui-form-label-required">签单人</label>
+      <div class="layui-input-inline layuiadmin-select-input" id="conUser"></div>
+    </div>
+    <div class="layui-form-item layui-inline">
+      <label class="layui-form-label layui-form-label-required">交档日期</label>
+      <div class="layui-input-inline">
+        <div class="layui-input-inline">
+          <input type="text" name="jdDate" id="jdDate" placeholder="请输入" autocomplete="off" class="layui-input input-show-val" required lay-verify="required">
+        </div>
+      </div>
+    </div>
+    <div class="layui-form-item layui-inline">
+      <label class="layui-form-label layui-form-label-required">交档人</label>
+      <div class="layui-input-inline layuiadmin-select-input" id="jdPeople"></div>
+    </div>
+    <div class="layui-form-item layui-form-text">
+      <label class="layui-form-label">备 注</label>
+      <div class="layui-input-block">
+        <textarea name="remark" placeholder="请输入" class="layui-textarea input-show-val"></textarea>
+      </div>
+    </div>
+    <div class="layui-form-item layui-form-text">
+      <label class="layui-form-label">付款方式</label>
+      <div class="layui-input-block">
+        <textarea name="payment" placeholder="请输入" class="layui-textarea input-show-val"></textarea>
+      </div>
+    </div>
+
+    <div class="layui-card-header header-title">附件</div>
+    <div class="table-container" id="table-container">
+      <div class="update-btn" id="update">
+        <i class="layui-icon layui-icon-add-circle"></i>添加
+      </div>
+      <table id="files-table" lay-filter="files-table"></table>
+      <script type="text/html" id="files-table-operation">
+        <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="download">下载</a>
+        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+      </script>
+    </div>
+
+    <div class="layui-form-item layui-hide">
+      <input type="button" lay-submit lay-filter="layuiadmin-app-form-save" id="layuiadmin-app-form-save" value="保存">
+      <input type="button" lay-submit lay-filter="layuiadmin-app-form-submit" id="layuiadmin-app-form-submit" value="提交">
+      <input type="button" lay-submit lay-filter="layuiadmin-app-form-approve" id="layuiadmin-app-form-cancel" value="取消">
+    </div>
+  </div>
+</div>
+
+<script src="../../../layui/layui.js"></script>
+<script src="../../config/config.js"></script>
+<script src="../../config/util.js"></script>
+<script>
+  function render(type, data = {}) {
+    layui.extend({
+      info: `{/}${layui.request.getContextPath()}/plugins/crm/utils/getInfo`,
+      operate: `{/}${layui.request.getContextPath()}/plugins/crm/utils/operate`,
+      contract: `{/}${layui.request.getContextPath()}/plugins/crm/components/contractModel/contract`,
+    }).use(['form', 'util', 'table', 'info', 'contract', 'laydate', 'operate'], function() {
+      const laydate = layui.laydate
+      const info = layui.info
+      const form = layui.form
+      const contract = layui.contract
+
+
+      let conUser = ''
+      // 签单人信息
+      info.getUsers('#conUser', () => {}, {
+        radio: true,
+        selectSuccess: (selectUser) => {
+          if(selectUser) {
+            $('#userDept').val(selectUser.userdept)
+            conUser = selectUser.value
+          } else {
+            $('#userDept').val('')
+            conUser = ''
+          }
+        }
+      })
+
+      let jdPeople = ''
+      info.getUsers('#jdPeople', () => {}, {
+        radio: true,
+        selectSuccess: (selectUser) => {
+          if(selectUser) {
+            jdPeople = selectUser.value
+          } else {
+            jdPeople = ''
+          }
+        }
+      })
+
+      info.getCustomer('#customer', (customerDom) => {})
+
+      info.getProject('#projectName', () => {}, {
+        isTemplate: true,
+        radio: true,
+        selectSuccess: (selectProject) => {
+          if (selectProject) {
+            $('#projectId').val(selectProject.value)
+          } else {
+            $('#projectId').val('')
+          }
+        }
+      })
+
+      //执行一个laydate实例
+      laydate.render({
+        elem: '#conDate' //指定元素
+      });
+      laydate.render({
+        elem: '#jdDate' //指定元素
+      });
+
+
+      contract.renderFiles()
+      contract.updateFiles('#update', (data = []) => {
+        contract.uploadSuccee('files-table', data)
+      })
+
+
+
+      // 保存
+      form.on('submit(layuiadmin-app-form-save)', (formData) => {
+        const field = formData.field
+        const params = {
+          projectId: field.projectId,
+          conNum: field.conNum,
+          conName: field.conName,
+          conDate: field.conDate,
+          conUser: conUser,
+          conMoney: field.conMoney,
+          remark: field.remark,
+          payment: field.payment,
+          jdDate: field.jdDate,
+          jdPeople: jdPeople,
+          // payMoney: '',
+          // settleMoney: '',
+          // conStatuss: '',
+          // sendStatus: ''
+        }
+        contract.saveContract(params)
+        console.log('保存')
+      })
+      // 提交审批
+      form.on('submit(layuiadmin-app-form-submit)', (formData) => {
+        console.log('提交审批')
+      })
+
+    })
+  }
+
+
+  function apply() {
+    render('apply')
+  }
+
+</script>
+</body>
+</html>

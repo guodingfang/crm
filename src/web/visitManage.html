@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>拜访管理</title>
+  <link rel="stylesheet" href="../plugins/layui/css/layui.css" media="all">
+  <link rel="stylesheet" href="../plugins/crm/assets/style/admin.css" media="all">
+  <style>
+    .layui-colla-content {
+      padding: 2px 2px 2px 6px;
+    }
+    .layui-table-view {
+      margin: 0;
+      border: none;
+    }
+    .layui-collapse.level-1 .layui-colla-title {
+      background-color: #fefefe;
+    }
+    .layui-collapse.level-2 .layui-colla-title {
+      background-color: #fefefe;
+    }
+    .layui-collapse.level-3 .layui-colla-title {
+      background-color: #fefefe;
+    }
+    .layui-collapse.level-4 .layui-colla-title {
+      background-color: #fefefe;
+    }
+  </style>
+</head>
+<body>
+
+<div class="layui-card layuiadmin-card-row">
+  <div class="layuiadmin-card-header">拜访管理</div>
+  <form class="layui-form layuiadmin-form" action="">
+    <div class="layui-form-item layui-inline">
+      <label class="layui-form-label">时间范围</label>
+      <div class="layui-input-inline">
+        <input type="text" name="userName" placeholder="请输入" autocomplete="off" class="layui-input">
+      </div>
+    </div>
+    <div class="layui-form-item layui-inline">
+      <label class="layui-form-label">中心</label>
+      <div class="layui-input-inline">
+        <input type="text" name="productName" placeholder="请输入" autocomplete="off" class="layui-input">
+      </div>
+    </div>
+    <div class="layui-form-item layui-inline">
+      <label class="layui-form-label">部门</label>
+      <div class="layui-input-inline">
+        <input type="text" name="productName" placeholder="请输入" autocomplete="off" class="layui-input">
+      </div>
+    </div>
+    <div class="layui-form-item layui-inline">
+      <label class="layui-form-label">姓名</label>
+      <div class="layui-input-inline">
+        <input type="text" name="productName" placeholder="请输入" autocomplete="off" class="layui-input">
+      </div>
+    </div>
+    <div class="layui-form-item layui-inline layuiadmin-form-btn">
+      <button class="layui-btn layui-btn-normal" lay-submit lay-filter="list-search">查询</button>
+      <button type="reset" class="layui-btn layui-btn-primary" id="reset">重置</button>
+    </div>
+  </form>
+</div>
+
+<div class="layui-card layuiadmin-card">
+  <div id="userTabBarContainer"></div>
+
+  <script id="userTabBar" type="text/html">
+    {{#
+      var fnc = function(list, level = 0) {
+        return `<div lay-filter="test1" class="layui-collapse level-${level}" lay-accordion>` + (list.map((item, index) => {
+          if(item.children) {
+            return `
+              <div class="layui-colla-item">
+                <h2 class="layui-colla-title" data-id='${item.id}'>${item.name}</h2>
+                <div class="layui-colla-content">
+                  ${ fnc(item.children, index + 1) }
+                </div>
+              </div>
+            `
+          } else {
+            return `
+              <div class="layui-colla-item">
+                <h2 class="layui-colla-title" data-id='${item.id}'>${item.name}</h2>
+                <div class="layui-colla-content">
+                  <table id="table-list-${item.id}" lay-filter="table-list-${item.id}"></table>
+                </div>
+              </div>
+            `
+          }
+        })).join('') + `</div>`
+      };
+    }}
+
+    {{ fnc(d) }}
+  </script>
+
+</div>
+
+
+<script src="../plugins/layui/layui.js"></script>
+<script src="../plugins/crm/config/util.js"></script>
+<script src="../plugins/crm/config/config.js"></script>
+<script>
+  let tableList = []
+  function render() {
+    layui.extend({
+      visit: `{/}${layui.request.getContextPath()}/plugins/crm/modules/visitManage`,
+    }).use(['visit', 'element', 'layer'], function () {
+      const $ = layui.$
+      const element = layui.element
+      const visit = layui.visit
+
+      element.on('collapse(test1)', function({ show }) {
+        console.log('this', this)
+        if (show) {
+          const id = $(this).attr('data-id')
+          const el = `table-list-${id}`
+          if (tableList.indexOf(el) === -1) {
+            tableList.push(el)
+            visit.renderTable(el)
+          }
+        }
+      });
+
+    })
+  }
+
+  render()
+</script>
+</body>
+</html>

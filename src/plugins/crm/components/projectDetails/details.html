@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>客户详情</title>
+  <link rel="stylesheet" href="../../../layui/css/layui.css" media="all">
+  <link rel="stylesheet" href="../../assets/style/admin.css" media="all">
+  <link rel="stylesheet" href="../../assets/style/details.css" media="all">
+</head>
+<body>
+<div class="layui-card layuiadmin-card-row layui-mask-container">
+  <div class="mask"></div>
+  <div class="layuiadmin-card-header">项目编号-项目名称</div>
+  <div class="layui-form layuiadmin-form" lay-filter="layuiadmin-app-form" id="layuiadmin-app-form">
+    <div class="layui-form-item layui-inline">
+      <label class="layui-form-label">项目类型</label>
+      <div class="layui-input-inline">
+        <select name="status" class="input-show-val">
+          <option value=""></option>
+        </select>
+      </div>
+    </div>
+    <div class="layui-form-item layui-inline">
+      <label class="layui-form-label">所属客户</label>
+      <div class="layui-input-inline">
+        <select name="character" id="character" lay-verify="required" class="input-show-val"></select>
+      </div>
+    </div>
+    <div class="layui-form-item layui-inline">
+      <label class="layui-form-label">客户经理</label>
+      <div class="layui-input-inline layuiadmin-select-input" id="manager"></div>
+    </div>
+    <div class="layui-form-item layui-inline">
+      <label class="layui-form-label">项目经理</label>
+      <div class="layui-input-inline">
+        <div class="layui-input-inline layuiadmin-select-input" id="manager2"></div>
+      </div>
+    </div>
+    <div class="layui-form-item layui-inline">
+      <label class="layui-form-label">业务部门</label>
+      <div class="layui-input-inline">
+        <input type="text" name="orgName" placeholder="请输入" autoComplete="off" class="layui-input" disabled>
+      </div>
+    </div>
+
+    <div class="layui-form-item layui-inline">
+      <label class="layui-form-label">立项时间</label>
+      <div class="layui-input-inline">
+        <input type="text" name="customerName" placeholder="请输入" autocomplete="off" class="layui-input">
+      </div>
+    </div>
+    <div class="layui-form-item layui-inline">
+      <label class="layui-form-label">预计签单金额</label>
+      <div class="layui-input-inline">
+        <input type="text" name="customerName" placeholder="请输入" autocomplete="off" class="layui-input">
+      </div>
+    </div>
+    <div class="layui-form-item layui-inline">
+      <label class="layui-form-label">立项金额</label>
+      <div class="layui-input-inline">
+        <input type="text" name="customerName" placeholder="请输入" autocomplete="off" class="layui-input">
+      </div>
+    </div>
+    <div class="layui-form-item layui-inline">
+      <label class="layui-form-label">赢      率</label>
+      <div class="layui-input-inline">
+        <input type="text" name="customerName" placeholder="请输入" autocomplete="off" class="layui-input">
+      </div>
+    </div>
+    <div class="layui-form-item layui-inline">
+      <label class="layui-form-label">跟踪阶段</label>
+      <div class="layui-input-inline">
+        <select name="character" lay-verify="required" class="input-show-val"></select>
+      </div>
+    </div>
+    <div class="layui-form-item layui-inline">
+      <label class="layui-form-label">预计签单日期</label>
+      <div class="layui-input-inline">
+        <input type="text" name="customerName" placeholder="请输入" autocomplete="off" class="layui-input">
+      </div>
+    </div>
+    <div class="layui-form-item layui-inline">
+      <label class="layui-form-label">项目模式</label>
+      <div class="layui-input-inline">
+        <select name="character" lay-verify="required" class="input-show-val"></select>
+      </div>
+    </div>
+    <div class="layui-form-item layui-block">
+      <label class="layui-form-label">备注</label>
+      <div class="layui-input-block">
+        <input type="text" name="remark" placeholder="请输入" autoComplete="off" class="layui-input input-show-val input-max">
+      </div>
+    </div>
+
+
+    <div id="moreFormDetails" class="more-form">
+      <div class="layui-form-item layui-block">
+        <label class="layui-form-label">详细地址</label>
+        <div class="layui-input-block">
+          <input type="text" name="address" placeholder="请输入" autoComplete="off" class="layui-input input-show-val input-max">
+        </div>
+      </div>
+      <div class="layui-form-item layui-block">
+        <label class="layui-form-label">已建设内容</label>
+        <div class="layui-input-block">
+          <input type="text" name="constructedContent" placeholder="请输入" autoComplete="off" class="layui-input input-show-val input-max">
+        </div>
+      </div>
+      <div class="layui-form-item layui-block">
+        <label class="layui-form-label">备注</label>
+        <div class="layui-input-block">
+          <input type="text" name="remark" placeholder="请输入" autoComplete="off" class="layui-input input-show-val input-max">
+        </div>
+      </div>
+    </div>
+
+    <div class="layui-form-item layui-hide">
+      <input type="button" lay-submit lay-filter="layuiadmin-app-form-submit" id="layuiadmin-app-form-edit" value="编辑">
+      <input type="button" lay-submit lay-filter="layuiadmin-app-form-save" id="layuiadmin-app-form-save" value="保存">
+    </div>
+  </div>
+
+  <div class="more-btn" id="more-btn">更多信息</div>
+</div>
+<div class="layui-card layuiadmin-card">
+
+  <script id="tabBar" type="text/html">
+    {{# layui.each(d, function(index, item) { }}
+    <li class="{{index === 0 ? 'layui-this' : ''}}">{{ item.name }}</li>
+    {{# }); }}
+  </script>
+
+  <div class="layui-tab layui-tab-brief" lay-filter="tabBar">
+    <ul id="tabBarContainer" class="layui-tab-title"></ul>
+    <div class="layui-tab-content" id="modelContainer">
+      <!--model1 start-->
+      <div class="layui-tab-item layui-show">
+        <table id="potential-order-table" lay-filter="potential-order-table"></table>
+        <script type="text/html" id="potential-order-table-operation">
+          <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="look">查看OA</a>
+          <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="edit">编辑</a>
+        </script>
+      </div>
+      <!--model1 end-->
+
+      <!--model2 start-->
+      <div class="layui-tab-item layui-show">
+        <table id="hav-order-table" lay-filter="hav-order-table"></table>
+        <script type="text/html" id="hav-order-table-operation">
+          <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="look">查看OA</a>
+          <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="edit">编辑</a>
+        </script>
+      </div>
+      <!--model2 end-->
+
+      <!--model3 start-->
+      <div class="layui-tab-item layui-show">
+        <script type="text/html" id="contract-manage-toolbar">
+          <button class="layui-btn layui-btn-sm layuiadmin-btn-list layui-btn-normal" data-type="apply">新建</button>
+        </script>
+        <table id="contract-manage-table" lay-filter="hav-order-table"></table>
+        <script type="text/html" id="contract-manage-table-operation">
+          <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="look">查看OA</a>
+          <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="edit">编辑</a>
+        </script>
+      </div>
+      <!--model3 end-->
+    </div>
+  </div>
+</div>
+
+
+<div class="footer-container">
+  <div class="footer">
+    <button class="layui-btn layuiadmin-btn-list layui-btn-normal" id="footer-btn-edit" data-type="edit">编辑</button>
+    <button class="layui-btn layuiadmin-btn-list layui-btn-primary layui-border-blue" id="footer-btn-back" data-type="back">返回</button>
+    <button class="layui-btn layuiadmin-btn-list layui-btn-normal" id="footer-btn-save" data-type="save">保存</button>
+    <button class="layui-btn layuiadmin-btn-list layui-btn-primary layui-border-blue" id="footer-btn-cancel" data-type="cancel">取消</button>
+  </div>
+</div>
+
+<script src="../../../layui/layui.js"></script>
+<script src="../../config/config.js"></script>
+<script src="../../config/util.js"></script>
+<script src="./config.js"></script>
+<script>
+  function render(data = {}) {
+    layui.extend({
+      info: `{/}${layui.request.getContextPath()}/plugins/crm/utils/getInfo`,
+      operate: `{/}${layui.request.getContextPath()}/plugins/crm/utils/operate`,
+      details: `{/}${layui.request.getContextPath()}/plugins/crm/components/projectDetails/details`,
+    }).use(['form', 'util', 'table', 'laydate', 'info', 'details', 'operate'], function() {
+      const form = layui.form,
+        laydate = layui.laydate,
+        details = layui.details;
+
+      const renderData = data
+
+      details.getTabBarInfo(renderData)
+    })
+  }
+
+  function init(data) {
+    render(data)
+  }
+
+  init()
+
+</script>
+</body>
+</html>

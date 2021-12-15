@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>打卡记录</title>
+  <link rel="stylesheet" href="../../plugins/layui/css/layui.css" media="all">
+  <link rel="stylesheet" href="../../plugins/crm/assets/style/admin.css" media="all">
+</head>
+<body>
+<div class="layui-card layuiadmin-card-row">
+  <div class="layuiadmin-card-header">打卡记录</div>
+  <form class="layui-form layuiadmin-form" action="">
+    <div id="deptContainer" class="layui-form-item layui-inline"></div>
+    <script id="isDeptContainer" type="text/html">
+      <label class="layui-form-label">业务部门</label>
+      <div class="layui-input-inline" id="dept"></div>
+    </script>
+    <div class="layui-form-item layui-inline">
+      <label class="layui-form-label">打卡日期</label>
+      <div class="layui-input-inline">
+        <input type="text" name="date" id="date" placeholder="请输入" autocomplete="off" class="layui-input">
+      </div>
+    </div>
+    <div class="layui-form-item layui-inline">
+      <label class="layui-form-label">打卡人</label>
+      <div class="layui-input-inline">
+        <input type="text" name="productName" placeholder="请输入" autocomplete="off" class="layui-input">
+      </div>
+    </div>
+    <div class="layui-form-item layui-inline layuiadmin-form-btn">
+      <button class="layui-btn layui-btn-normal" lay-submit lay-filter="list-search">查询</button>
+      <button type="reset" class="layui-btn layui-btn-primary" id="reset">重置</button>
+    </div>
+  </form>
+</div>
+
+<div class="layui-card layuiadmin-card">
+  <table id="table-list" lay-filter="table-list"></table>
+</div>
+
+<script src="../../plugins/layui/layui.js"></script>
+<script src="../../plugins/crm/config/util.js"></script>
+<script src="../../plugins/crm/config/config.js"></script>
+<script>
+  let tableList = []
+  function render() {
+    layui.extend({
+      info: `{/}${layui.request.getContextPath()}/plugins/crm/utils/getInfo`,
+      operate: `{/}${layui.request.getContextPath()}/plugins/crm/utils/operate`,
+    }).use(['element', 'form', 'table', 'info', 'operate', 'laydate', 'laytpl', 'layer'], function () {
+      const form = layui.form,
+        table = layui.table,
+        info = layui.info,
+        operate = layui.operate,
+        laydate = layui.laydate,
+        laytpl = layui.laytpl
+
+      operate.ajaxGet('/user/getRole', { code: window.user.code }, (data) => {
+        let role = data || '无效角色'
+        if (role === '营销主管' || role === 'CRM管理员' || role === '超级管理员') {
+          const deptHtml = laytpl(isDeptContainer.innerHTML).render({})
+          document.getElementById('deptContainer').innerHTML = deptHtml
+          getDep()
+        }
+      })
+
+      const getDep = () => {
+        info.getOrganizationTree('#dept', {}, () => {}, {
+          required: 'no',
+          radio: false
+        })
+      }
+
+      laydate.render({
+        elem: '#date' //指定元素
+        ,range: `~`
+      });
+
+      operate.searchForm({
+        url:`${crmURL}/position/queryPosition`,
+        paramsRegroup: (params) => {
+          const { date = '', ...args } = params
+          const [startDate, endDate] = getDateRange(date)
+          return {
+            ...args,
+            startDate,
+            endDate
+          }
+        }
+      })
+
+      table.render({
+        elem: '#table-list'
+        ,url:`${crmURL}/position/queryPosition`
+        ,toolbar: '#toolbar' //开启头部工具栏，并为其绑定左侧模板
+        ,defaultToolbar: ['filter']
+        ,cellMinWidth: 80 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
+        ,height: 'full-200'
+        ,parseData: function(res) {
+          return {
+            code: 0,
+            msg: res.msg,
+            count: res.data.total,
+            data: res.data.records
+          }
+        }
+        ,cols: [[
+          {width:60,align:'center', title: '序号', type: 'numbers'}
+          ,{field:'groupName', width:160, align: 'center', title: '事业集群' }
+          ,{field:'centerName', width:160, align: 'center', title: '中心' }
+          ,{field:'deptName', width:150, align: 'center', title: '业务部门' }
+          ,{field:'name', minWidth: 250, title: '打卡人' }
+          ,{field:'location', width:120, align: 'center', title: '打卡地点'}
+          ,{field:'managerName', width:160, align: 'center', title: '备注'}
+          ,{field:'positionDate', width:160, align: 'center', title: '打卡日期'}
+          ,{field:'positionTime', width:160, align: 'center', title: '打卡时间'}
+        ]]
+        ,page: true
+        ,request: {
+          pageName: 'current',
+          limitName: 'size',
+        }
+        ,limit: 50
+        ,limits: [50, 100, 150, 200]
+        ,done: function (res, curr, count) {
+
+        }
+      })
+
+
+    })
+  }
+
+  render()
+</script>
+</body>
+</html>

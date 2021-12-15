@@ -1,0 +1,145 @@
+ul.layui-transfer-data>li {
+  display: flex;
+  align-items: center;
+}
+.layui-form-item {
+  margin-right: auto;
+}
+.more-form {
+  width: 100%;
+}
+.more-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px;
+  cursor: pointer;
+  color: #1E9FFF;
+  max-width: 1210px;
+}
+
+
+/* record */
+
+.record-container {
+  width: 1000px;
+}
+
+.record-model {
+  display: flex;
+  flex-direction: column;
+}
+
+.record-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.record-user {
+  display: flex;
+  align-items: center;
+}
+
+.record-footer {
+  margin-top: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* 联系人新增表格 */
+.contact-table-container {
+  padding: 24px;
+  max-width: 800px;
+  /*margin: auto;*/
+}
+
+.table-add-btn {
+  display: inline-flex;
+  align-items: center;
+  color: #1E9FFF;
+  padding: 6px;
+}
+.table-add-btn:hover {
+  cursor: pointer;
+}
+.table-add-btn .layui-icon {
+  padding-right: 2px;
+}
+
+#moreFormDetails {
+  display: none;
+}
+#footer-btn-save,
+#footer-btn-cancel {
+  display: none;
+}
+.layui-input-block {
+  margin-left: 0;
+}
+.input-show-text-val {
+  display: none;
+  width: 190px;
+  padding: 9px 15px;
+}
+
+.header-title {
+  display: flex;
+  align-items: center;
+}
+
+.header-title h3 {
+  font-weight: bold;
+}
+
+.add-button {
+  font-size: 16px;
+}
+
+/* footer */
+.footer-container {
+  height: 50px;
+}
+.footer {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 50px;
+  background-color: #ffffff;
+  display: flex;
+  align-items: center;
+  padding-left: 24px;
+  z-index: 99999;
+  border-top: 1px solid #e5e5e5;
+}
+.footer .layui-btn {
+  margin: 0 10px 0 0;
+}
+
+/**
+ * mask
+ */
+
+.layui-mask-container {
+  position: relative;
+}
+.mask {
+  display: none;
+  position: absolute;
+  width: 100%;
+  height: calc(100% - 60px);
+  z-index: 999;
+  cursor: not-allowed;
+}
+
+/* 拜访记录 */
+.visit-record {
+  margin-top: 12px;
+}
+
+.search-visit-record {
+  margin-left: 12px;
+}

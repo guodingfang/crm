@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" href="../../../layui/css/layui.css" media="all">
+  <link rel="stylesheet" href="../../assets/style/admin.css" media="all">
+  <link rel="stylesheet" href="../../assets/style/model.css" media="all">
+</head>
+<body>
+
+<div class="layui-card layuiadmin-card">
+  <div class="layui-form" lay-filter="layuiadmin-app-form" id="layuiadmin-app-form">
+    <div class="layui-card-header header-title">票据信息</div>
+    <div class="layui-form-item">
+      <label class="layui-form-label layui-form-label-required">开票名称</label>
+      <div class="layui-input-block">
+        <input type="text" name="ticketName" placeholder="请输入" autocomplete="off" class="layui-input" required lay-verify="required">
+      </div>
+    </div>
+    <div class="layui-form-item">
+      <label class="layui-form-label layui-form-label-required">纳税人识别号</label>
+      <div class="layui-input-block">
+        <input type="text" name="taxNo" placeholder="请输入" autocomplete="off" class="layui-input" required lay-verify="required">
+      </div>
+    </div>
+    <div class="layui-form-item">
+      <label class="layui-form-label layui-form-label-required">地址</label>
+      <div class="layui-input-block">
+        <input type="text" name="address" placeholder="请输入" autocomplete="off" class="layui-input" required lay-verify="required">
+      </div>
+    </div>
+    <div class="layui-form-item">
+      <label class="layui-form-label layui-form-label-required">电话</label>
+      <div class="layui-input-block">
+        <input type="text" name="phone" placeholder="请输入" autocomplete="off" class="layui-input" required lay-verify="required">
+      </div>
+    </div>
+    <div class="layui-form-item">
+      <label class="layui-form-label layui-form-label-required">开户行</label>
+      <div class="layui-input-block">
+        <input type="text" name="bank" placeholder="请输入" autocomplete="off" class="layui-input" required lay-verify="required">
+      </div>
+    </div>
+    <div class="layui-form-item">
+      <label class="layui-form-label layui-form-label-required">账号</label>
+      <div class="layui-input-block">
+        <input type="text" name="account" placeholder="请输入" autocomplete="off" class="layui-input" required lay-verify="required">
+      </div>
+    </div>
+    <div class="layui-form-item layui-hide">
+      <input type="button" lay-submit lay-filter="layuiadmin-app-form-save" id="layuiadmin-app-form-save" value="确认保存">
+    </div>
+  </div>
+</div>
+
+<script src="../../../layui/layui.js"></script>
+<script>
+  function render(type, data) {
+    const renderData = data
+    layui.extend({
+      info: `{/}${layui.request.getContextPath()}/plugins/crm/utils/getInfo`,
+      operate: `{/}${layui.request.getContextPath()}/plugins/crm/utils/operate`,
+    }).use(['form', 'table', 'operate', 'layer'], function () {
+      const form = layui.form
+      const operate = layui.operate
+
+      if (type === 'edit') {
+        form.val('layuiadmin-app-form', {
+          ...renderData,
+        })
+      }
+
+      form.on('submit(layuiadmin-app-form-save)', function(formData) {
+        let params = {}
+        if (type === 'apply') {
+          params = {
+            ...formData.field,
+            customerId: renderData.id,
+            createUser: window.user.name || ''
+          }
+        } else if (type === 'edit') {
+          params = {
+            ...renderData,
+            ...formData.field,
+            updateUser: window.user.name || ''
+          }
+        }
+
+        operate.ajaxPost('ticket/create', {
+          ...params,
+        }, {
+          success: () => {
+            layer.msg('新增成功');
+            setTimeout(function () {
+              const index = layui.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+              opener.layui.table.reload('billing-info-table'); //重载表格
+              layui.layer.close(index); //再执行关闭
+            }, 1000)
+          }
+        })
+      })
+    })
+  }
+
+  function edit(data) {
+    render('edit', data)
+  }
+
+  function apply(data) {
+    render('apply', data)
+  }
+</script>
+</body>
+</html>

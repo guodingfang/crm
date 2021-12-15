@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>客户管理</title>
+  <link rel="stylesheet" href="../plugins/layui/css/layui.css" media="all">
+  <link rel="stylesheet" href="../plugins/crm/assets/style/admin.css" media="all">
+  <style>
+    .cell-status {
+      min-width: 70px;
+      display: flex;
+      align-items: center;
+    }
+    .cell-status span {
+      margin-right: 8px;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+  </style>
+</head>
+<body>
+
+<div class="layui-card layuiadmin-card-row">
+  <div class="layuiadmin-card-header">客户管理<span id="total"></span></div>
+  <form class="layui-form layuiadmin-form" action="">
+    <div class="layui-form-item layui-inline">
+      <label class="layui-form-label">客户名称</label>
+      <div class="layui-input-inline">
+        <input type="text" name="customerName" placeholder="请输入" autocomplete="off" class="layui-input">
+      </div>
+    </div>
+    <div class="layui-form-item layui-inline">
+      <label class="layui-form-label">客户性质</label>
+      <div class="layui-input-inline">
+        <select name="character" id="character">
+          <option value=""></option>
+        </select>
+      </div>
+    </div>
+    <div class="layui-form-item layui-inline">
+      <label class="layui-form-label">状态</label>
+      <div class="layui-input-inline">
+        <select name="status" id="status">
+          <option value=""></option>
+          <option value="0">报备中</option>
+          <option value="1">已生效</option>
+          <option value="2">被驳回</option>
+        </select>
+      </div>
+    </div>
+
+    <div id="deptContainer" class="layui-form-item layui-inline"></div>
+    <script id="isDeptContainer" type="text/html">
+      <label class="layui-form-label">业务部门</label>
+      <div class="layui-input-inline" id="dept"></div>
+    </script>
+
+    <div class="layui-form-item layui-inline">
+      <label class="layui-form-label">所在省份</label>
+      <div class="layui-input-inline">
+        <select name="province" id="province" lay-filter="layuiadmin-province">
+          <option value=""></option>
+        </select>
+      </div>
+    </div>
+    <div class="layui-form-item layui-inline">
+      <label class="layui-form-label">所在城市</label>
+      <div class="layui-input-inline">
+        <select name="city" id="city" disabled>
+          <option value=""></option>
+        </select>
+      </div>
+    </div>
+
+    <div id="managerContainer" class="layui-form-item layui-inline"></div>
+    <script id="isManagerContainer" type="text/html">
+      <label class="layui-form-label">客户经理</label>
+      <div class="layui-input-inline" id="manager"></div>
+    </script>
+
+<!--    <div class="layui-form-item layui-inline">-->
+<!--      <label class="layui-form-label">客户经理</label>-->
+<!--      <div class="layui-input-inline" id="manager"></div>-->
+<!--    </div>-->
+    <div class="layui-form-item layui-inline">
+      <label class="layui-form-label">创建时间</label>
+      <div class="layui-input-inline">
+        <input type="text" class="layui-input" id="createDate" name="createDate" autocomplete="off" placeholder="请选择">
+      </div>
+    </div>
+    <div class="layui-form-item layui-inline layuiadmin-form-btn">
+      <button class="layui-btn layui-btn-normal" lay-submit lay-filter="list-search">查询</button>
+      <button type="reset" class="layui-btn layui-btn-primary" id="reset">重置</button>
+    </div>
+  </form>
+</div>
+
+<div class="layui-card layuiadmin-card">
+  <script type="text/html" id="toolbar">
+    <button class="layui-btn layui-btn-sm layuiadmin-btn-list layui-btn-normal" data-type="add">客户报备</button>
+  </script>
+  <table id="table-list" lay-filter="table-list"></table>
+
+  <script type="text/html" id="table-content-list">
+    <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="look">
+      {{# if(d.status === 3) { }}
+        编辑
+      {{# } else { }}
+        查看
+      {{# } }}
+    </a>
+  </script>
+</div>
+
+<script src="../plugins/layui/layui.js"></script>
+<script src="../plugins/crm/config/util.js"></script>
+<script src="../plugins/crm/config/config.js"></script>
+<script>
+  function render() {
+    layui.extend({
+      info: `{/}${layui.request.getContextPath()}/plugins/crm/utils/getInfo`,
+      operate: `{/}${layui.request.getContextPath()}/plugins/crm/utils/operate`,
+      client: `{/}${layui.request.getContextPath()}/plugins/crm/modules/clientManage`,
+    }).use(['client', 'layer', 'laytpl', 'info', 'operate', 'laydate'], function () {
+      const $ = layui.$,
+        client = layui.client,
+        laytpl = layui.laytpl,
+        laydate = layui.laydate,
+        info = layui.info,
+        operate = layui.operate;
+
+      laydate.render({
+        elem: '#createDate' //指定元素
+        ,range: `~`
+      });
+
+      client.getUserRole((role) => {
+        if (role !== '大区经理' && role !== '客户经理') {
+          const deptHtml = laytpl(isDeptContainer.innerHTML).render({})
+          document.getElementById('deptContainer').innerHTML = deptHtml
+          info.getOrganizationTree('#dept', {}, () => {}, {
+            required: 'no',
+            radio: false
+          })
+        }
+
+        if (role !== '客户经理') {
+          const managerHtml = laytpl(isManagerContainer.innerHTML).render({})
+          document.getElementById('managerContainer').innerHTML = managerHtml
+        }
+      })
+    })
+  }
+  render()
+</script>
+
+</body>
+</html>

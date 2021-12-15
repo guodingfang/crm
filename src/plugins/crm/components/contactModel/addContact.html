@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" href="../../../layui/css/layui.css" media="all">
+  <link rel="stylesheet" href="../../assets/style/admin.css" media="all">
+  <link rel="stylesheet" href="../../assets/style/model.css" media="all">
+</head>
+<body>
+<div class="layui-card layuiadmin-card">
+  <div class="layui-form" lay-filter="layuiadmin-app-form" id="layuiadmin-app-form">
+    <div class="layui-card-header header-title">基本信息</div>
+    <div class="layui-form-item">
+      <label class="layui-form-label layui-form-label-required">客户名称</label>
+      <div class="layui-input-block layuiadmin-select-input" id="customer"></div>
+    </div>
+
+    <div class="layui-form-item layui-hide">
+      <input type="button" lay-submit lay-filter="layuiadmin-app-form-save" id="layuiadmin-app-form-save" value="确认保存">
+    </div>
+  </div>
+
+  <div class="layui-card-header header-title">联系人信息</div>
+  <div class="table-container">
+    <div class="add-button">
+      <div class="table-add-btn" id="add-btn-contact">
+        <i class="layui-icon layui-icon-add-circle"></i>添加
+      </div>
+    </div>
+    <table id="contact-list" lay-filter="contact-list"></table>
+    <script type="text/html" id="contact-operation-list">
+      {{# if(d.mainContact === 1) { }}
+      <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+      {{# } }}
+    </script>
+  </div>
+</div>
+
+<script src="../../../layui/layui.js"></script>
+<script src="../../config/config.js"></script>
+<script src="../../config/util.js"></script>
+<script>
+  function render(type, data = {}) {
+    layui.extend({
+      info: `{/}${layui.request.getContextPath()}/plugins/crm/utils/getInfo`,
+      operate: `{/}${layui.request.getContextPath()}/plugins/crm/utils/operate`,
+      addContact: `{/}${layui.request.getContextPath()}/plugins/crm/components/contactModel/addContact`
+    }).use(['form', 'table', 'addContact', 'layer'], function () {
+      const $ = layui.$,
+        form = layui.form,
+        table = layui.table,
+        info = layui.info
+        addContact = layui.addContact;
+
+      const renderData = data
+      let selectCustomer = null
+
+      info.getCustomer('#customer', (customerDom) => {
+        if (renderData.customerId) {
+          customerDom.setValue([renderData.customerId])
+        }
+      }, {
+        selectSuccess: (data) => {
+          const { value } = data
+          getInfo(value)
+        },
+        radio: true,
+        disabled: renderData.customerId
+      })
+
+      const getInfo = (id) => {
+        if (!id) return
+        $.get(`${crmURL}/customer/queryCustomer?id=${id}`, function ({ code, data }) {
+          if (code === 0) {
+            console.log('data', data)
+            selectCustomer = data[0]
+            $('#add-btn-contact').off('click')
+            addContact.renderTable(selectCustomer)
+          }
+        })
+      }
+
+      if (renderData.customerId) {
+        getInfo(renderData.customerId)
+      }
+
+
+      form.on('submit(layuiadmin-app-form-save)', (formData) => {
+        console.log('提交审批', formData)
+        addContact.save(selectCustomer)
+      })
+
+    })
+  }
+
+  function edit(data) {
+    render('edit', data)
+  }
+
+  function apply() {
+    render('apply')
+  }
+</script>
+</body>
+</html>

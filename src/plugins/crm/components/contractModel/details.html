@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>客户详情</title>
+  <link rel="stylesheet" href="../../../layui/css/layui.css" media="all">
+  <link rel="stylesheet" href="../../assets/style/admin.css" media="all">
+  <style>
+  </style>
+</head>
+<body>
+
+<div class="layui-card layuiadmin-card-row layui-mask-container">
+  <div class="mask"></div>
+  <div class="layuiadmin-card-header">合同管理</div>
+  <div class="layui-form layuiadmin-form layuiadmin-form-auto" lay-filter="layuiadmin-app-form" id="layuiadmin-app-form">
+    <div class="layui-form-item layui-inline">
+      <label class="layui-form-label">合同编号</label>
+      <div class="layui-input-inline">
+        <input type="text" name="customerName" placeholder="请输入" autocomplete="off" class="layui-input input-show-val">
+      </div>
+    </div>
+    <div class="layui-form-item layui-inline">
+      <label class="layui-form-label">合同名称</label>
+      <div class="layui-input-inline">
+        <input type="text" name="customerName" placeholder="请输入" autocomplete="off" class="layui-input input-show-val">
+      </div>
+    </div>
+    <div class="layui-form-item layui-inline">
+      <label class="layui-form-label">项目编号</label>
+      <div class="layui-input-inline">
+        <input type="text" name="customerName" placeholder="请输入" autocomplete="off" class="layui-input input-show-val">
+      </div>
+    </div>
+    <div class="layui-form-item layui-inline">
+      <label class="layui-form-label">项目名称</label>
+      <div class="layui-input-inline">
+        <input type="text" name="customerName" placeholder="请输入" autocomplete="off" class="layui-input input-show-val">
+      </div>
+    </div>
+    <div class="layui-form-item layui-inline">
+      <label class="layui-form-label">归属客户</label>
+      <div class="layui-input-inline">
+        <input type="text" name="customerName" placeholder="请输入" autocomplete="off" class="layui-input input-show-val">
+      </div>
+    </div>
+    <div class="layui-form-item layui-inline">
+      <label class="layui-form-label">归属部门</label>
+      <div class="layui-input-inline">
+        <input type="text" name="customerName" placeholder="请输入" autocomplete="off" class="layui-input input-show-val">
+      </div>
+    </div>
+    <div class="layui-form-item layui-inline">
+      <label class="layui-form-label">签单日期</label>
+      <div class="layui-input-inline">
+        <input type="text" name="customerName" placeholder="请输入" autocomplete="off" class="layui-input input-show-val">
+      </div>
+    </div>
+    <div class="layui-form-item layui-inline">
+      <label class="layui-form-label">签单人</label>
+      <div class="layui-input-inline">
+        <input type="text" name="customerName" placeholder="请输入" autocomplete="off" class="layui-input input-show-val">
+      </div>
+    </div>
+    <div class="layui-form-item layui-inline">
+      <label class="layui-form-label">合同金额</label>
+      <div class="layui-input-inline">
+        <input type="text" name="customerName" placeholder="请输入" autocomplete="off" class="layui-input input-show-val">
+      </div>
+    </div>
+    <div class="layui-form-item layui-inline">
+      <label class="layui-form-label">已回款金额</label>
+      <div class="layui-input-inline">
+        <input type="text" name="customerName" placeholder="请输入" autocomplete="off" class="layui-input input-show-val">
+      </div>
+    </div>
+    <div class="layui-form-item layui-inline">
+      <label class="layui-form-label">交档日期</label>
+      <div class="layui-input-inline">
+        <input type="text" name="customerName" placeholder="请输入" autocomplete="off" class="layui-input input-show-val">
+      </div>
+    </div>
+    <div class="layui-form-item layui-inline">
+      <label class="layui-form-label">交档人</label>
+      <div class="layui-input-inline">
+        <input type="text" name="customerName" placeholder="请输入" autocomplete="off" class="layui-input input-show-val">
+      </div>
+    </div>
+    <div class="layui-form-item layui-inline">
+      <label class="layui-form-label">阶段金额</label>
+      <div class="layui-input-inline">
+        <input type="text" name="customerName" placeholder="请输入" autocomplete="off" class="layui-input input-show-val">
+      </div>
+    </div>
+    <div class="layui-form-item layui-inline">
+      <label class="layui-form-label">已回款比例</label>
+      <div class="layui-input-inline">
+        <input type="text" name="customerName" placeholder="请输入" autocomplete="off" class="layui-input input-show-val">
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="layui-card layuiadmin-card">
+  <div class="layui-tab layui-tab-brief" lay-filter="tabBar">
+    <ul class="layui-tab-title">
+      <li id="returned-price" class="layui-this">回款计划</li>
+      <li id="open-records">开票记录</li>
+    </ul>
+    <div class="layui-tab-content">
+      <div class="layui-tab-item layui-show">
+        <table id="returned-price-table" lay-filter="returned-price-table"></table>
+        <script type="text/html" id="returned-price-table-operation">
+          <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="edit">编辑</a>
+          <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="price">回款明细</a>
+          <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="download">下载附件</a>
+          <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="remove">删除</a>
+        </script>
+      </div>
+      <div class="layui-tab-item">
+        <table id="open-records-table" lay-filter="open-records-table"></table>
+        <script type="text/html" id="open-records-table-operation">
+          <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="look">查看OA</a>
+        </script>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="../../../layui/layui.js"></script>
+<script src="../../config/config.js"></script>
+<script src="../../config/util.js"></script>
+<script src="./config.js"></script>
+<script>
+  function render(data = {}) {
+    layui.extend({
+      info: `{/}${layui.request.getContextPath()}/plugins/crm/utils/getInfo`,
+      operate: `{/}${layui.request.getContextPath()}/plugins/crm/utils/operate`,
+      contract: `{/}${layui.request.getContextPath()}/plugins/crm/components/contractModel/contract`,
+    }).use(['form', 'util', 'table', 'laydate', 'element', 'info', 'contract', 'operate'], function() {
+      const form = layui.form,
+        element = layui.element,
+        laydate = layui.laydate,
+        contract = layui.contract
+
+      $('.layui-input-inline input').attr('disabled', true)
+
+      contract.renderTable('returned-price')
+
+      element.on('tab(tabBar)', function({ index }){
+        const el = $(this).attr('id')
+        contract.renderTable(el)
+      });
+    })
+  }
+
+  function init(data) {
+    render(data)
+  }
+</script>
+</body>
+</html>

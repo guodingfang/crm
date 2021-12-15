@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" href="../../../layui/css/layui.css" media="all">
+  <link rel="stylesheet" href="../../assets/style/admin.css" media="all">
+  <link rel="stylesheet" href="../../assets/style/model.css" media="all">
+  <style>
+    .layuiadmin-form-item-column textarea.layui-textarea {
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+<div class="layui-card layuiadmin-card">
+  <div class="layui-form" lay-filter="layuiadmin-app-form" id="layuiadmin-app-form">
+    <div class="layui-form-item layui-form-text layuiadmin-form-item-column">
+      <label class="layui-form-label" id="title"></label>
+      <div class="layui-input-block">
+        <textarea name="notes" placeholder="请输入" class="layui-textarea" required lay-verify="required"></textarea>
+      </div>
+    </div>
+
+    <div class="layui-form-item layui-hide">
+      <input type="button" lay-submit lay-filter="layuiadmin-app-form-submit" id="layuiadmin-app-form-submit" value="确认提交">
+      <input type="button" lay-submit lay-filter="layuiadmin-app-form-approve" id="layuiadmin-app-form-cancel" value="取消">
+    </div>
+  </div>
+</div>
+
+<script src="../../../layui/layui.js"></script>
+<script src="../../config/config.js"></script>
+<script src="../../config/util.js"></script>
+<script>
+function init(data, parentIndex, type) {
+  layui.extend({
+    info: `{/}${layui.request.getContextPath()}/plugins/crm/utils/getInfo`,
+    operate: `{/}${layui.request.getContextPath()}/plugins/crm/utils/operate`,
+  }).use(['info', 'operate', 'form'], function() {
+    const form = layui.form,
+      operate = layui.operate;
+
+    $('#title').html(type === 'reject' ? '说明' : '说明')
+
+    form.on('submit(layuiadmin-app-form-submit)', function(formData) {
+      const params = {
+        customerId: data.id,
+        ...formData.field
+      }
+      operate.ajaxGet(`/customer/reg/${type}`, {
+        ...params
+      }, () => {
+        layer.msg(`报备${type === 'reject' ? '已驳回' : '通过成功'}`);
+        setTimeout(function () {
+          const index = layui.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+          opener.opener.layui.table.reload('table-list'); //重载表格
+          layui.layer.close(index); //再执行关闭
+          opener.layui.layer.close(parentIndex)
+        }, 1000)
+      })
+    });
+  })
+}
+</script>
+</body>
+</html>

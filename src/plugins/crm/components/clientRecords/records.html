@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" href="../../../layui/css/layui.css" media="all">
+  <link rel="stylesheet" href="../../assets/style/admin.css" media="all">
+  <link rel="stylesheet" href="../../assets/style/model.css" media="all">
+  <style>
+    .input-show-text-val {
+      display: none;
+      padding: 9px 15px;
+    }
+    .table-container .layui-table-header .layui-table-cell span {
+      position: relative;
+      display: inline-flex;
+    }
+    .table-container .layui-table-header th:not(:first-child):not(:last-child) .layui-table-cell span:after {
+      position: absolute;
+      top: 2px;
+      margin: auto;
+      right: -6px;
+      content: '*';
+      color: #f00;
+    }
+    #errorTips {
+      display: none;
+      color: #f00;
+      padding: 15px;
+    }
+  </style>
+</head>
+<body>
+<div class="mask"></div>
+<div class="layui-card layuiadmin-card">
+  <div class="layui-form" lay-filter="layuiadmin-app-form" id="layuiadmin-app-form">
+    <div class="layui-card-header header-title">基本信息</div>
+    <div class="layui-form-item layui-block">
+      <label class="layui-form-label layui-form-label-required">客户名称</label>
+      <div class="layui-input-block">
+        <input type="text" name="customerName" placeholder="请输入" autocomplete="off" class="layui-input input-show-val" id="customerName" required lay-verify="required">
+      </div>
+    </div>
+    <div class="layui-form-item layui-inline">
+      <label class="layui-form-label layui-form-label-required">客户性质</label>
+      <div class="layui-input-inline">
+        <select name="character" id="character" lay-verify="required" class="input-show-val">
+          <option value=""></option>
+        </select>
+      </div>
+    </div>
+    <div class="layui-form-item layui-inline">
+      <label class="layui-form-label layui-form-label-required">客户类型</label>
+      <div class="layui-input-inline">
+        <select name="type" id="type" lay-verify="required" class="input-show-val">
+          <option value=""></option>
+        </select>
+      </div>
+    </div>
+    <div class="layui-form-item layui-inline">
+      <label class="layui-form-label layui-form-label-required">所在省份</label>
+      <div class="layui-input-inline">
+        <select name="province" id="province" lay-verify="required" lay-filter="layuiadmin-province" class="input-show-val">
+          <option value=""></option>
+        </select>
+      </div>
+    </div>
+    <div class="layui-form-item layui-inline">
+      <label class="layui-form-label layui-form-label-required">所在城市</label>
+      <div class="layui-input-inline">
+        <select name="city" id="city" lay-verify="required" disabled class="input-show-val">
+          <option value=""></option>
+        </select>
+      </div>
+    </div>
+    <div class="layui-form-item layui-block">
+      <label class="layui-form-label layui-form-label-required">详细地址</label>
+      <div class="layui-input-block">
+        <input type="text" name="address" placeholder="请输入" autocomplete="off" class="layui-input input-show-val" required lay-verify="required">
+      </div>
+    </div>
+    <div class="layui-form-item layui-inline">
+      <label class="layui-form-label">客户经理</label>
+      <div class="layui-input-inline">
+        <input type="text" name="manager" placeholder="请输入" autocomplete="off" class="layui-input" disabled>
+      </div>
+    </div>
+    <div class="layui-form-item layui-inline">
+      <label class="layui-form-label">业务部门</label>
+      <div class="layui-input-inline">
+        <input type="text" name="orgName" placeholder="请输入" autocomplete="off" class="layui-input" disabled>
+      </div>
+    </div>
+    <div class="layui-form-item layui-form-text">
+      <label class="layui-form-label">已建设内容</label>
+      <div class="layui-input-block">
+        <textarea name="constructedContent" placeholder="请输入" class="layui-textarea input-show-val"></textarea>
+      </div>
+    </div>
+    <div class="layui-form-item layui-hide">
+      <input type="button" lay-submit lay-filter="layuiadmin-app-form-submit" id="layuiadmin-app-form-submit" value="确认提交">
+      <input type="button" lay-submit lay-filter="layuiadmin-app-form-save" id="layuiadmin-app-form-save" value="保存">
+      <input type="button" lay-submit lay-filter="layuiadmin-app-form-approve" id="layuiadmin-app-form-approve" value="审批通过">
+      <input type="button" lay-submit lay-filter="layuiadmin-app-form-delete" id="layuiadmin-app-form-delete" value="确认删除 ">
+      <input type="button" lay-submit lay-filter="layuiadmin-app-form-reject" id="layuiadmin-app-form-reject" value="确认驳回">
+    </div>
+  </div>
+
+  <div class="layui-card-header header-title">联系人信息</div>
+  <div class="table-container">
+    <div class="add-button">
+      <div class="table-add-btn" id="add-btn-contact">
+        <i class="layui-icon layui-icon-add-circle"></i>添加
+      </div>
+    </div>
+    <table id="contact-list" lay-filter="contact-list"></table>
+    <script type="text/html" id="contact-operation-list">
+      <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+    </script>
+  </div>
+
+  <div id="errorTips">
+    驳回原因：<span></span>
+  </div>
+</div>
+
+<script src="../../../layui/layui.js"></script>
+<script src="../../config/config.js"></script>
+<script src="../../config/util.js"></script>
+<script>
+  function render(type, data = {}) {
+    layui.extend({
+      info: `{/}${layui.request.getContextPath()}/plugins/crm/utils/getInfo`,
+      operate: `{/}${layui.request.getContextPath()}/plugins/crm/utils/operate`,
+      records: `{/}${layui.request.getContextPath()}/plugins/crm/components/clientRecords/records`
+    }).use(['form', 'util', 'table', 'info', 'records', 'operate'], function() {
+      const $ = layui.$,
+        records = layui.records,
+        info = layui.info,
+        form = layui.form;
+      if (data.status === 2) {
+        const notes = data.regLogList.length ? data.regLogList[0].notes || '' : ''
+        $('#errorTips')
+          .css('display', 'block')
+          .children('span')
+          .html(notes)
+      }
+
+      form.val('layuiadmin-app-form', {
+        ...data,
+        manager: window.user.name || '',
+        orgName: window.user.orgName || ''
+      })
+
+      records.getRegionInfo('#province', type, data, {
+        params: {
+          regionLevel: 0,
+        }
+      })
+      if (data.city && data.provinceCode) {
+        $('#city').removeAttr('disabled')
+        records.getRegionInfo('#city', type, data, {
+          clearData: !data.provinceCode,
+          params: {
+            regionLevel: 1,
+            parentCode: data.provinceCode,
+          }
+        })
+      }
+
+      records.getCustomerCharacter('#character', type, data)
+      records.getCustomerType('#type', type, data)
+
+      // form表单监控
+      form.on('select(layuiadmin-province)', (data) => {
+        const [code] = data.value.split('|')
+        if (code) {
+          $('#city').removeAttr('disabled')
+        } else {
+          $('#city').attr('disabled', true)
+        }
+        records.getRegionInfo('#city', type, data, {
+          clearData: !code,
+          params: {
+            regionLevel: 1,
+            parentCode: code,
+          }
+        })
+      })
+
+      $("#customerName").on("input", (e) => {
+        const keywords = e.delegateTarget.value
+        info.getCustomerByNameList('#customerName', { params: { keywords } })
+      })
+
+      $("#customerName").on("focus", () => {
+        $('#customerName').next('.customer-name-list').css("display", "block")
+      })
+
+      $("#customerName").on("blur", () => {
+        $('#customerName').next('.customer-name-list').css("display", "none")
+      })
+
+      records.renderTable(type, data.liaisonList || [])
+
+      // 保存
+      form.on('submit(layuiadmin-app-form-save)', (formData) => {
+        records.save(formData, data)
+      })
+      // 提交审批
+      form.on('submit(layuiadmin-app-form-submit)', (formData) => {
+        console.log('提交审批', formData)
+        if (data.status === 2) {
+          records.update(formData, data)
+        } else {
+          records.create(formData, data)
+        }
+      })
+      // 审批通过
+      form.on('submit(layuiadmin-app-form-approve)', (formData) => {
+        console.log('审批通过')
+        records.openRejectArgument(data, {
+          title: '通过',
+        }, 'pass')
+      })
+      // 删除
+      form.on('submit(layuiadmin-app-form-delete)', (formData) => {
+        console.log('删除')
+        records.remove(data)
+      })
+      // 驳回
+      form.on('submit(layuiadmin-app-form-reject)', (formData) => {
+        console.log('驳回')
+        records.openRejectArgument(data, {
+          title: '驳回',
+        }, 'reject')
+      })
+
+    })
+  }
+
+  function edit(data, readOnly) {
+    console.log('data', data)
+    if (readOnly) {
+      $('.input-show-val').attr('disabled', true)
+      $('.add-button').css('display', 'none')
+      $('.mask').css('display', 'block')
+    }
+    render('edit', data)
+  }
+
+  function apply() {
+    render('apply')
+  }
+
+</script>
+</body>
+</html>

@@ -1,0 +1,245 @@
+body {
+  line-height: 24px;
+  font: 14px Helvetica Neue,Helvetica,PingFang SC,Tahoma,Arial,sans-serif;
+  background-color: #f2f2f2;
+  margin: 15px;
+}
+
+
+/* 头部图标重置 */
+.layui-card-header.layuiadmin-card-header-auto{padding-top: 15px; padding-bottom: 15px; height: auto;}
+.layuiadmin-card-header-auto i.layuiadmin-button-btn{position: relative; right: 0; top: 0; vertical-align: middle;}
+.layuiadmin-card-header-auto .layui-form-item:last-child{margin-bottom: 0;}
+
+
+/* 数据概览 */
+.layadmin-dataview{height: 332px !important;}
+.layadmin-dataview>*[carousel-item]:before{display: none;}
+.layadmin-dataview>*[carousel-item]>*{display: inline-block;}
+.layadmin-dataview>*[carousel-item]>div{height: 332px;}
+
+/* layui样式覆盖 */
+.layui-table th {
+  font-weight: bold;
+}
+
+.layui-card-header {
+  font-size: 16px;
+  border: none;
+}
+
+.layui-layer-btn .layui-layer-btn1 {
+  border-color: #2E8DED;
+  color: #2E8DED;
+}
+
+.layui-form-label {
+  min-width: 80px;
+  width: auto;
+}
+
+.layui-layer-btn {
+  border-top: 2px solid #e5e5e5;
+  border-image: -webkit-linear-gradient(#e5e5e5,#fff) 30 30;
+  border-image: -moz-linear-gradient(#e5e5e5,#fff) 30 30;
+  border-image: linear-gradient(#e5e5e5,#fff) 30 30;
+  box-sizing: border-box;
+}
+
+.layui-table-view .layui-table {
+  width: 100% !important;
+}
+
+.layui-input-block .layui-input,
+.layuiadmin-select-input {
+  width: 506px;
+}
+
+.layui-form-item .layuiadmin-min-input{
+  width: 160px;
+}
+
+.layuiadmin-form-btn {
+  margin-left: 60px;
+}
+
+
+/* layui form样式重置 column */
+.layuiadmin-form-item-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.layuiadmin-form-item-column .layui-form-label {
+  text-align: left;
+}
+.layuiadmin-form-item-column .layui-input-block {
+  margin: 0 15px;
+}
+
+/* x-select重置 */
+.xm-body .xm-option {
+  max-width: 506px;
+}
+
+xm-select > .xm-body .xm-option-content {
+  display: block;
+}
+
+xm-select > .xm-label.single-row .scroll {
+  height: 100%;
+}
+
+xm-select > .xm-label.single-row .scroll::-webkit-scrollbar {/*滚动条宽度*/
+  width: 4px;
+  height: 4px;
+}
+
+.layui-table * {
+  font-size: 12px;
+}
+
+.layuiadmin-form {
+  max-width: 1410px;
+  justify-content: flex-start;
+}
+
+.layuiadmin-card {
+  padding: 12px;
+}
+
+.layuiadmin-card-row {
+  padding: 10px 15px;
+}
+
+
+.layuiadmin-card-header {
+  font-size: 18px;
+  color: #666666;
+  margin-bottom: 15px;
+}
+
+.layuiadmin-card-col {
+  padding: 0 12px;
+}
+
+/* 表达required */
+.layui-form-label-required {
+  position: relative;
+}
+
+.layui-form-label-required::after {
+  position: absolute;
+  right: 5px;
+  top: 10px;
+  content: '*';
+  color: #f00;
+}
+
+.layuiadmin-label-over-length {
+  padding-left: 0;
+  padding-right: 12px;
+}
+
+/* 按钮 */
+.cell-btn-item-line {
+  display: inline-block;
+  color: #1E9FFF;
+  width: 100%;
+  height: 100%;
+}
+
+.cell-btn-item-line:hover {
+  cursor: pointer;
+}
+
+/* 滚动条美化 */
+::-webkit-scrollbar {/*滚动条宽度*/
+  width: 6px;
+  height: 12px;
+}
+::-webkit-scrollbar-track {/*滚动条凹槽的颜色，还可以设置边框属性*/
+  background-color:#e5e5e5;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  border-radius:8px;
+}
+::-webkit-scrollbar-thumb {/*滚动条的设置*/
+  background-color: #C9C9C9;
+  -webkit-border-radius:8px;
+  -moz-border-radius: 8px;
+  border-radius:8px;
+}
+
+input:disabled,
+textarea:disabled {
+  background-color: #f5f5f5;
+  cursor: not-allowed;
+}
+
+/* 设置模糊查询客户名称列表css */
+ul.customer-name-list {
+  position: absolute;
+  z-index: 9999;
+  width: 506px;
+  max-height: 300px;
+  overflow-y: auto;
+  background-color: #ffffff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, .05);
+}
+
+ul.customer-name-list .customer-name-item {
+  height: 36px;
+  display: flex;
+  align-items: center;
+  padding-left: 12px;
+  border-bottom: 1px solid #e5e5e5;
+  cursor: not-allowed;
+}
+
+
+/**
+ * xmSelect-transfer 穿梭框
+ */
+
+.transfer-container, .layui-transfer {
+  margin: 4px;
+  display: flex;
+  align-items: center;
+}
+
+.transfer-container, .layui-transfer .layui-transfer-search .layui-input {
+  box-sizing: border-box;
+}
+
+.transfer-container, .layui-transfer .layui-transfer-box .layui-form-checkbox {
+  box-sizing: border-box;
+}
+
+.layui-transfer-box {
+  overflow: hidden;
+}
+
+.transfer-container .layui-transfer-box .layui-transfer-data {
+  height: calc(100% - 104px) !important;
+}
+
+.transfer-li-mask {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 99;
+}
+
+.transfer-btn-select-main {
+  min-width: 10px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  padding: 0;
+}
+
+/*.transfer-li-main {*/
+/*  position: absolute;*/
+/*  z-index: 99;*/
+/*}*/

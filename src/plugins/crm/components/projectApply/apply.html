@@ -1,0 +1,566 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>项目立项</title>
+  <link rel="stylesheet" href="../../../layui/css/layui.css" media="all">
+  <link rel="stylesheet" href="../../assets/style/admin.css" media="all">
+  <link rel="stylesheet" href="./apply.css" media="all">
+</head>
+<body>
+<div class="layui-form" lay-filter="layuiadmin-app-form" id="layuiadmin-app-form">
+  <div class="layui-card layuiadmin-card-row">
+    <h2 class="header">项目立项</h2>
+    <h3 class="layui-card-header header-title">
+      <div>一、项目基本信息</div>
+      <div class="tag">经营类项目</div>
+    </h3>
+
+    <div class="layui-form-item layui-inline">
+      <label class="layui-form-label layui-form-label-required">项目名称</label>
+      <div class="layui-input-inline">
+        <input type="text" name="productName" placeholder="请输入" autocomplete="off" class="layui-input" required lay-verify="required">
+      </div>
+    </div>
+    <div class="layui-form-item layui-inline">
+      <label class="layui-form-label layui-form-label-required">事业集群</label>
+      <div class="layui-input-inline">
+        <select name="productStatus" required lay-verify="required">
+          <option value=""></option>
+        </select>
+      </div>
+    </div>
+    <div class="layui-form-item layui-inline">
+      <label class="layui-form-label layui-form-label-required">客户名称</label>
+      <div class="layui-input-inline">
+        <select name="productStatus" required lay-verify="required">
+          <option value=""></option>
+        </select>
+      </div>
+    </div>
+
+    <div class="layui-block">
+      <div class="layui-form-item layui-inline">
+        <label class="layui-form-label layui-form-label-required">业主是否立项</label>
+        <div class="layui-input-inline layuiadmin-radio">
+          <input type="radio" name="isIncludeEmbedSoftware" value="是" lay-verify="radioReq" lay-filter="layuiadmin-app-form-radio" title="是">
+          <input type="radio" name="isIncludeEmbedSoftware" value="否" lay-verify="radioReq" lay-filter="layuiadmin-app-form-radio" title="否">
+        </div>
+      </div>
+
+      <div class="layui-form-item layui-inline">
+        <label class="layui-form-label layui-form-label-required">资金来源</label>
+        <div class="layui-input-inline">
+          <select name="productStatus" required lay-verify="required">
+            <option value=""></option>
+          </select>
+        </div>
+      </div>
+
+      <div class="layui-form-item layui-inline software-input" id="otherPriceSourceContainer"></div>
+
+      <script id="otherPriceSource" type="text/html">
+        <label class="layui-form-label layui-form-label-required">其他资金来源</label>
+        <div class="layui-input-inline">
+          <input type="text" id="sPrice" name="softwarePrice" placeholder="请输入" autocomplete="off" class="layui-input" required lay-verify="required">
+        </div>
+      </script>
+
+    </div>
+
+    <div class="layui-block">
+      <div class="layui-form-item layui-inline">
+        <label class="layui-form-label layui-form-label-required">客户地址</label>
+        <div class="layui-input-inline">
+          <input type="text" name="productName" placeholder="请输入" autocomplete="off" class="layui-input" required lay-verify="required">
+        </div>
+      </div>
+
+      <div class="layui-form-item layui-inline">
+        <label class="layui-form-label layui-form-label-required">资金到位情况</label>
+        <div class="layui-input-inline">
+          <select name="priceStatus" required lay-verify="required">
+            <option value=""></option>
+          </select>
+        </div>
+      </div>
+
+      <div class="layui-form-item layui-inline" id="pricePlaceExplainContainer"></div>
+
+      <script id="pricePlaceExplain" type="text/html">
+        <label class="layui-form-label layui-form-label-required">资金到位情况说明</label>
+        <div class="layui-input-inline">
+          <input type="text" id="sPrice2" name="softwarePrice" placeholder="请输入" autocomplete="off" class="layui-input" required lay-verify="required">
+        </div>
+      </script>
+    </div>
+
+    <div class="layui-form-item layui-inline">
+      <label class="layui-form-label layui-form-label-required">立项或签单主体</label>
+      <div class="layui-input-inline">
+        <select name="priceStatus" required lay-verify="required">
+          <option value=""></option>
+        </select>
+      </div>
+    </div>
+
+    <div class="layui-form-item layui-inline">
+      <label class="layui-form-label layui-form-label-required">是否参与设计</label>
+      <div class="layui-input-inline layuiadmin-radio">
+        <input type="radio" name="isIncludeEmbedSoftware" value="是" lay-verify="radioReq" lay-filter="layuiadmin-app-form-radio" title="是">
+        <input type="radio" name="isIncludeEmbedSoftware" value="否" lay-verify="radioReq" lay-filter="layuiadmin-app-form-radio" title="否">
+      </div>
+    </div>
+    <div class="layui-form-item layui-inline">
+      <label class="layui-form-label layui-form-label-required">立项人</label>
+      <div class="layui-input-inline">
+        <input type="text" name="productName" placeholder="请输入" autocomplete="off" class="layui-input" required lay-verify="required">
+      </div>
+    </div>
+    <div class="layui-form-item layui-inline">
+      <label class="layui-form-label layui-form-label-required">立项部门</label>
+      <div class="layui-input-inline">
+        <select name="priceStatus" required lay-verify="required">
+          <option value=""></option>
+        </select>
+      </div>
+    </div>
+    <div class="layui-form-item layui-inline">
+      <label class="layui-form-label layui-form-label-required">立项金额（元）</label>
+      <div class="layui-input-inline">
+        <input type="text" name="productName" placeholder="请输入" autocomplete="off" class="layui-input" required lay-verify="required">
+      </div>
+    </div>
+    <div class="layui-form-item layui-inline">
+      <label class="layui-form-label layui-form-label-required">客户经理</label>
+      <div class="layui-input-inline">
+        <select name="priceStatus" required lay-verify="required">
+          <option value=""></option>
+        </select>
+      </div>
+    </div>
+
+    <div class="layui-block">
+      <div class="layui-form-item layui-inline">
+        <label class="layui-form-label layui-form-label-required">业务部门</label>
+        <div class="layui-input-inline">
+          <select name="priceStatus" required lay-verify="required">
+            <option value=""></option>
+          </select>
+        </div>
+      </div>
+
+      <div class="layui-form-item layui-inline">
+        <label class="layui-form-label layui-form-label-required">是否招标</label>
+        <div class="layui-input-inline layuiadmin-radio">
+          <input type="radio" name="isIncludeEmbedSoftware" value="是" lay-verify="radioReq" lay-filter="layuiadmin-app-form-radio" title="是">
+          <input type="radio" name="isIncludeEmbedSoftware" value="否" lay-verify="radioReq" lay-filter="layuiadmin-app-form-radio" title="否">
+        </div>
+      </div>
+
+      <div class="layui-form-item layui-inline" id="tenderWayContainer"></div>
+
+      <script id="tenderWay" type="text/html">
+        <label class="layui-form-label layui-form-label-required">招标方式</label>
+        <div class="layui-input-inline">
+          <select name="priceStatus" required lay-verify="required">
+            <option value=""></option>
+          </select>
+        </div>
+      </script>
+    </div>
+
+
+    <div class="layui-form-item layui-inline">
+      <label class="layui-form-label layui-form-label-required">预计签单率（%）</label>
+      <div class="layui-input-inline">
+        <input type="text" name="productName" placeholder="请输入" autocomplete="off" class="layui-input" required lay-verify="required">
+      </div>
+    </div>
+
+    <div class="layui-form-item layui-inline">
+      <label class="layui-form-label layui-form-label-required">项目计划投标时间</label>
+      <div class="layui-input-inline">
+        <select name="priceStatus" required lay-verify="required">
+          <option value=""></option>
+        </select>
+      </div>
+    </div>
+    <div class="layui-form-item layui-inline">
+      <label class="layui-form-label layui-form-label-required">项目计划签单时间</label>
+      <div class="layui-input-inline">
+        <select name="priceStatus" required lay-verify="required">
+          <option value=""></option>
+        </select>
+      </div>
+    </div>
+    <div class="layui-form-item layui-inline">
+      <label class="layui-form-label layui-form-label-required">项目计划完工时间</label>
+      <div class="layui-input-inline">
+        <select name="priceStatus" required lay-verify="required">
+          <option value=""></option>
+        </select>
+      </div>
+    </div>
+    <div class="layui-form-item layui-inline">
+      <label class="layui-form-label layui-form-label-required">预计利润率（%）</label>
+      <div class="layui-input-inline">
+        <input type="text" name="productName" placeholder="请输入" autocomplete="off" class="layui-input" required lay-verify="required">
+      </div>
+    </div>
+    <div class="layui-form-item layui-inline">
+      <label class="layui-form-label layui-form-label-required">项目预计付款方式</label>
+      <div class="layui-input-inline">
+        <input type="text" name="productName" placeholder="请输入" autocomplete="off" class="layui-input" required lay-verify="required">
+      </div>
+    </div>
+    <div class="layui-form-item layui-block">
+      <label class="layui-form-label layui-form-label-required">项目建设内容</label>
+      <div class="layui-input-block">
+        <textarea name="productDesc" maxlength="500" placeholder="请输入" class="layui-textarea" required lay-verify="required"></textarea>
+      </div>
+    </div>
+    <div class="layui-block">
+      <div class="layui-form-item layui-inline">
+        <label class="layui-form-label layui-form-label-required">建设模式</label>
+        <div class="layui-input-inline">
+          <input type="checkbox" name="" title="建设" lay-skin="primary">
+          <input type="checkbox" name="" title="服务" lay-skin="primary">
+        </div>
+      </div>
+    </div>
+
+    <div class="layui-block" id="constructionContainer"></div>
+    <div class="layui-block" id="serviceContainer"></div>
+
+    <script id="construction" type="text/html">
+      <div class="layui-form-item layui-inline">
+        <label class="layui-form-label layui-form-label-required">建设金额</label>
+        <div class="layui-input-inline">
+          <input type="text" name="productName" placeholder="请输入" autocomplete="off" class="layui-input" required lay-verify="required">
+        </div>
+      </div>
+      <div class="layui-form-item layui-inline">
+        <label class="layui-form-label layui-form-label-required">建设金额占比</label>
+        <div class="layui-input-inline">
+          <input type="text" name="productName" placeholder="请输入" autocomplete="off" class="layui-input" required lay-verify="required">
+        </div>
+      </div>
+    </script>
+
+    <script id="service" type="text/html">
+      <div class="layui-form-item layui-inline">
+        <label class="layui-form-label layui-form-label-required">服务期（月）</label>
+        <div class="layui-input-inline">
+          <input type="text" name="productName" placeholder="请输入" autocomplete="off" class="layui-input" required lay-verify="required">
+        </div>
+      </div>
+      <div class="layui-form-item layui-inline">
+        <label class="layui-form-label layui-form-label-required">服务金额</label>
+        <div class="layui-input-inline">
+          <input type="text" name="productName" placeholder="请输入" autocomplete="off" class="layui-input" required lay-verify="required">
+        </div>
+      </div>
+      <div class="layui-form-item layui-inline">
+        <label class="layui-form-label layui-form-label-required">服务金额占比</label>
+        <div class="layui-input-inline">
+          <input type="text" name="productName" placeholder="请输入" autocomplete="off" class="layui-input" required lay-verify="required">
+        </div>
+      </div>
+    </script>
+
+    <div class="layui-block">
+      <div class="layui-form-item layui-inline">
+        <label class="layui-form-label layui-form-label-required">项目跟踪周期</label>
+        <div class="layui-input-inline">
+          <select name="priceStatus" required lay-verify="required">
+            <option value=""></option>
+          </select>
+        </div>
+      </div>
+
+      <div class="layui-form-item layui-inline">
+        <label class="layui-form-label layui-form-label-required">客户信用</label>
+        <div class="layui-input-inline layuiadmin-radio">
+          <input type="radio" name="isIncludeEmbedSoftware" value="是" lay-verify="radioReq" lay-filter="layuiadmin-app-form-radio" title="是">
+          <input type="radio" name="isIncludeEmbedSoftware" value="否" lay-verify="radioReq" lay-filter="layuiadmin-app-form-radio" title="否">
+        </div>
+      </div>
+
+      <div class="layui-inline" id="creditStatusContainer"></div>
+      <script id="creditStatus" type="text/html">
+        <div class="layui-form-item layui-inline">
+          <label class="layui-form-label layui-form-label-required">客户信用情况说明</label>
+          <div class="layui-input-inline">
+            <input type="text" name="productName" placeholder="请输入" autocomplete="off" class="layui-input" required lay-verify="required">
+          </div>
+        </div>
+      </script>
+    </div>
+
+    <div class="layui-form-item layui-inline">
+      <label class="layui-form-label layui-form-label-required">预计使用到自有产品</label>
+      <div class="layui-input-inline">
+        <input type="text" name="productName" placeholder="请输入" autocomplete="off" class="layui-input" required lay-verify="required">
+      </div>
+    </div>
+    <div class="layui-form-item layui-inline">
+      <label class="layui-form-label layui-form-label-required">预计自有产品合同额(元)</label>
+      <div class="layui-input-inline">
+        <input type="text" name="productName" placeholder="请输入" autocomplete="off" class="layui-input" required lay-verify="required">
+      </div>
+    </div>
+    <div class="layui-form-item layui-inline">
+      <label class="layui-form-label layui-form-label-required">自配率</label>
+      <div class="layui-input-inline">
+        <input type="text" name="productName" placeholder="请输入" autocomplete="off" class="layui-input" required lay-verify="required">
+      </div>
+    </div>
+
+    <div class="layui-form-item layui-inline">
+      <label class="layui-form-label layui-form-label-required">业务分类</label>
+      <div class="layui-input-inline">
+        <select name="priceStatus" required lay-verify="required">
+          <option value=""></option>
+        </select>
+      </div>
+    </div>
+
+    <div class="layui-form-item layui-inline">
+      <label class="layui-form-label layui-form-label-required">预期实施方式</label>
+      <div class="layui-input-inline">
+        <select name="priceStatus" required lay-verify="required">
+          <option value=""></option>
+        </select>
+      </div>
+    </div>
+
+    <div class="layui-inline" id="otherImplementContainer"></div>
+    <script id="otherImplement" type="text/html">
+      <div class="layui-form-item layui-inline">
+        <label class="layui-form-label layui-form-label-required">预期实施方式（其他）</label>
+        <div class="layui-input-inline">
+          <input type="text" name="productName" placeholder="请输入" autocomplete="off" class="layui-input" required lay-verify="required">
+        </div>
+      </div>
+    </script>
+
+    <div class="layui-form-item layui-block">
+      <label class="layui-form-label layui-form-label-required">项目投标所需资质</label>
+      <div class="layui-input-block">
+        <textarea name="productDesc" maxlength="500" placeholder="请输入" class="layui-textarea" required lay-verify="required"></textarea>
+      </div>
+    </div>
+    <div class="layui-form-item layui-inline">
+      <label class="layui-form-label layui-form-label-required">公司资质是否满足</label>
+      <div class="layui-input-inline layuiadmin-radio">
+        <input type="radio" name="isIncludeEmbedSoftware" value="是" lay-verify="radioReq" lay-filter="layuiadmin-app-form-radio" title="是">
+        <input type="radio" name="isIncludeEmbedSoftware" value="否" lay-verify="radioReq" lay-filter="layuiadmin-app-form-radio" title="否">
+      </div>
+    </div>
+    <div class="layui-form-item layui-block">
+      <label class="layui-form-label layui-form-label-required">项目合作模式</label>
+      <div class="layui-input-block">
+        <textarea name="productDesc" maxlength="500" placeholder="请输入" class="layui-textarea" required lay-verify="required"></textarea>
+      </div>
+    </div>
+
+    <div class="table-container">
+      <div class="table-header">
+        <h5 class="table-title">附件</h5>
+        <div class="add-button">
+          <div class="table-add-btn" id="add-btn-accessory">
+            <i class="layui-icon layui-icon-add-circle"></i>添加
+          </div>
+        </div>
+      </div>
+      <table id="accessory-list" lay-filter="accessory-list"></table>
+      <script type="text/html" id="accessory-operation-list">
+        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+      </script>
+    </div>
+  </div>
+
+
+  <div class="layui-card layuiadmin-card-row">
+    <h3 class="layui-card-header header-title">二、客户信息</h3>
+    <div class="layui-form-item layui-inline">
+      <label class="layui-form-label layui-form-label-required">所属省份</label>
+      <div class="layui-input-inline">
+        <input type="text" name="productName" placeholder="请输入" autocomplete="off" class="layui-input" required lay-verify="required">
+      </div>
+    </div>
+    <div class="layui-form-item layui-inline">
+      <label class="layui-form-label layui-form-label-required">所属城市</label>
+      <div class="layui-input-inline">
+        <input type="text" name="productName" placeholder="请输入" autocomplete="off" class="layui-input" required lay-verify="required">
+      </div>
+    </div>
+    <div class="layui-form-item layui-inline">
+      <label class="layui-form-label layui-form-label-required">客户性质</label>
+      <div class="layui-input-inline">
+        <input type="text" name="productName" placeholder="请输入" autocomplete="off" class="layui-input" required lay-verify="required">
+      </div>
+    </div>
+    <div class="layui-form-item layui-inline">
+      <label class="layui-form-label layui-form-label-required">客户规模</label>
+      <div class="layui-input-inline">
+        <input type="text" name="productName" placeholder="请输入" autocomplete="off" class="layui-input" required lay-verify="required">
+      </div>
+    </div>
+    <div class="layui-form-item layui-inline">
+      <label class="layui-form-label layui-form-label-required">客户关系</label>
+      <div class="layui-input-inline">
+        <input type="text" name="productName" placeholder="请输入" autocomplete="off" class="layui-input" required lay-verify="required">
+      </div>
+    </div>
+
+    <div class="table-container">
+      <div class="table-header">
+        <h5 class="table-title">客户维护情况</h5>
+        <div class="add-button">
+          <div class="table-add-btn" id="add-btn-maintain">
+            <i class="layui-icon layui-icon-add-circle"></i>添加
+          </div>
+        </div>
+      </div>
+
+      <table id="maintain-list" lay-filter="maintain-list"></table>
+      <script type="text/html" id="maintain-operation-list">
+        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+      </script>
+    </div>
+
+    <div class="layui-form-item layui-inline">
+      <label class="layui-form-label">有无设计单位信息</label>
+      <div class="layui-input-inline layuiadmin-radio">
+        <input type="radio" name="ppp" value="有信息" lay-verify="radioReq" lay-filter="layuiadmin-app-form-radio" title="有信息" checked>
+        <input type="radio" name="ppp" value="无信息" lay-verify="radioReq" lay-filter="layuiadmin-app-form-radio" title="无信息">
+      </div>
+    </div>
+
+    <div class="table-container">
+      <div class="table-header">
+        <h5 class="table-title">设计单位</h5>
+        <div class="add-button">
+          <div class="table-add-btn" id="add-btn-design">
+            <i class="layui-icon layui-icon-add-circle"></i>添加
+          </div>
+        </div>
+      </div>
+
+      <table id="design-list" lay-filter="design-list"></table>
+      <script type="text/html" id="design-operation-list">
+        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+      </script>
+    </div>
+
+    <div class="layui-form-item layui-inline">
+      <label class="layui-form-label">有无招标公司信息</label>
+      <div class="layui-input-inline layuiadmin-radio">
+        <input type="radio" name="ooo" value="有信息" lay-verify="radioReq" lay-filter="layuiadmin-app-form-radio" title="有信息" checked>
+        <input type="radio" name="ooo" value="无信息" lay-verify="radioReq" lay-filter="layuiadmin-app-form-radio" title="无信息">
+      </div>
+    </div>
+
+    <div class="table-container">
+      <div class="table-header">
+        <h5 class="table-title">招标公司</h5>
+        <div class="add-button">
+          <div class="table-add-btn" id="add-btn-tendering">
+            <i class="layui-icon layui-icon-add-circle"></i>添加
+          </div>
+        </div>
+      </div>
+
+      <table id="tendering-list" lay-filter="tendering-list"></table>
+      <script type="text/html" id="tendering-operation-list">
+        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+      </script>
+    </div>
+
+  </div>
+
+  <div class="layui-card layuiadmin-card-row">
+    <h3 class="layui-card-header header-title">三、其他信息</h3>
+
+    <div class="table-container">
+      <div class="table-header">
+        <h5 class="table-title">竞争对手情况</h5>
+        <div class="add-button">
+          <div class="table-add-btn" id="add-btn-competitor">
+            <i class="layui-icon layui-icon-add-circle"></i>添加
+          </div>
+        </div>
+      </div>
+
+      <table id="competitor-list" lay-filter="competitor-list"></table>
+      <script type="text/html" id="competitor-operation-list">
+        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+      </script>
+    </div>
+
+    <div class="layui-form-item layui-block">
+      <label class="layui-form-label">项目风险</label>
+      <div class="layui-input-block">
+        <textarea name="productDesc" maxlength="500" placeholder="请输入" class="layui-textarea"></textarea>
+      </div>
+    </div>
+
+    <div class="table-container">
+      <div class="table-header">
+        <h5 class="table-title">合作伙伴</h5>
+        <div class="add-button">
+          <div class="table-add-btn" id="add-btn-cooperation">
+            <i class="layui-icon layui-icon-add-circle"></i>添加
+          </div>
+        </div>
+      </div>
+
+      <table id="cooperation-list" lay-filter="competitor-list"></table>
+      <script type="text/html" id="cooperation-operation-list">
+        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+      </script>
+    </div>
+
+
+  </div>
+</div>
+
+
+<script src="../../../layui/layui.js"></script>
+<script src="../../config/config.js"></script>
+<script src="../../config/util.js"></script>
+<script>
+  function render(data = {}) {
+    layui.extend({
+      info: `{/}${layui.request.getContextPath()}/plugins/crm/utils/getInfo`,
+      operate: `{/}${layui.request.getContextPath()}/plugins/crm/utils/operate`,
+      apply: `{/}${layui.request.getContextPath()}/plugins/crm/components/projectApply/apply`,
+    }).use(['form', 'util', 'table', 'info', 'operate', 'apply'], function() {
+      const form = layui.form
+      const table = layui.table
+      const apply = layui.apply
+
+      apply.renderFormItem(otherPriceSource)
+      apply.renderFormItem(pricePlaceExplain)
+      apply.renderFormItem(tenderWay, () => {
+        form.render()
+      })
+      apply.renderFormItem(construction)
+      apply.renderFormItem(service)
+      apply.renderFormItem(creditStatus)
+      apply.renderFormItem(otherImplement)
+    })
+  }
+
+  function init(data) {
+    render(data)
+  }
+  init()
+</script>
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>联系人管理</title>
+  <link rel="stylesheet" href="../plugins/layui/css/layui.css" media="all">
+  <link rel="stylesheet" href="../plugins/crm/assets/style/admin.css" media="all">
+</head>
+<body>
+
+<div class="layui-card layuiadmin-card-row">
+  <div class="layuiadmin-card-header">联系人管理<span id="total"></span></div>
+  <form class="layui-form layuiadmin-form" action="">
+    <div class="layui-form-item layui-inline">
+      <label class="layui-form-label">联系人姓名</label>
+      <div class="layui-input-inline">
+        <input type="text" name="name" placeholder="请输入" autocomplete="off" class="layui-input">
+      </div>
+    </div>
+    <div class="layui-form-item layui-inline">
+      <label class="layui-form-label">联系电话</label>
+      <div class="layui-input-inline">
+        <input type="text" name="phoneNum" placeholder="请输入" autocomplete="off" class="layui-input">
+      </div>
+    </div>
+    <div class="layui-form-item layui-inline">
+      <label class="layui-form-label">所属客户</label>
+      <div class="layui-input-inline">
+        <input type="text" name="customerName" placeholder="请输入" autocomplete="off" class="layui-input">
+      </div>
+    </div>
+    <div class="layui-form-item layui-inline">
+      <label class="layui-form-label">客户经理</label>
+      <div class="layui-input-inline">
+        <input type="text" name="managerName" placeholder="请输入" autocomplete="off" class="layui-input">
+      </div>
+    </div>
+    <div class="layui-form-item layui-inline layuiadmin-form-btn">
+      <button class="layui-btn layui-btn-normal" lay-submit lay-filter="list-search">查询</button>
+      <button type="reset" class="layui-btn layui-btn-primary" id="reset">重置</button>
+    </div>
+  </form>
+</div>
+
+<div class="layui-card layuiadmin-card">
+  <script type="text/html" id="toolbar">
+    <button class="layui-btn layui-btn-sm layuiadmin-btn-list layui-btn-normal" data-type="add">新建联系人</button>
+  </script>
+
+  <table id="table-list" lay-filter="table-list"></table>
+
+  <script type="text/html" id="table-content-list">
+    <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="edit">编辑</a>
+    {{# if(d.mainContact === 1) { }}
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+    {{# } }}
+  </script>
+</div>
+
+<script src="../plugins/layui/layui.js"></script>
+<script src="../plugins/crm/config/util.js"></script>
+<script src="../plugins/crm/config/config.js"></script>
+<script>
+  function render() {
+    layui.extend({
+      contact: `{/}${layui.request.getContextPath()}/plugins/crm/modules/contactManage`,
+    }).use(['contact', 'layer'], function () {
+      const $ = layui.$
+      const contact = layui.contact
+    })
+  }
+
+  render()
+</script>
+
+</body>
+</html>
